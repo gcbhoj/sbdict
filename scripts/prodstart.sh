@@ -1,7 +1,7 @@
 #!/bin/sh
 
 gunicorn \
-  --bind 0.0.0.0:5001 \
+  --bind 0.0.0.0:7860 \
   --workers 2 \
   --timeout 120 \
   server:app

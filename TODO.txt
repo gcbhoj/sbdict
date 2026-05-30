@@ -16,3 +16,8 @@ API ENDPOINTS
 EXPLORE pycdsl for dictionary
 
 trial push to render for compatibility and exposing API ENDPOINTS
+
+
+container details
+
+

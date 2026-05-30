@@ -4,11 +4,11 @@ WORKDIR /app
 
 
 # Copy requirements
-COPY requirements.txt .
+COPY requirements_prod.txt .
 
 # Install Python dependencies
 RUN pip install --upgrade pip setuptools wheel && \
-    pip install -r requirements.txt 
+    pip install -r requirements_prod.txt 
 
 # Download spaCy English model
 RUN python -m spacy download en_core_web_sm
