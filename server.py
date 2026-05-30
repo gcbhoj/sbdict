@@ -10,7 +10,7 @@ from middleware.error_handler import (register_error_handlers)
 from routes.tokenized_data_routes import tokenize_data_bp
 from routes.story_data_routes import story_data_bp
 
-
+PORT = int(os.getenv("PORT", 7860))
 
 app = Flask(__name__)
 CORS(app)
@@ -34,7 +34,7 @@ register_error_handlers(app)
 if __name__ == '__main__':
        app.run(
         host="0.0.0.0",
-        port=ENV["PORT"],
+        port=PORT,
         debug=ENV["NODE_ENV"] == "development"
     )
     

@@ -23,6 +23,6 @@ RUN chmod +x /prodstart.sh
 
 ENV PYTHONPATH=/app
 
-EXPOSE 5001
+EXPOSE 7860
 
 CMD ["/prodstart.sh"]
