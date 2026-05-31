@@ -19,6 +19,13 @@ CORS(app)
 
 BASE_URL = "/api/v1/python"
 
+@app.route("/")
+def home():
+    return jsonify({
+        "success": True,
+        "message": "SB Canada Dictionary API is running"
+    })
+
 
 app.register_blueprint(story_data_bp,url_prefix = BASE_URL)
 app.register_blueprint(tokenize_data_bp,url_prefix=BASE_URL)
