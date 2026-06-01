@@ -3,36 +3,41 @@ Get tokenized stories By Category
 tags:
   - Tokenized Data Routes
 
-summary: Retrieve a tokenized stories By Category
+summary: Retrieve tokenized stories by category
 
 description: >
- Returns a tokenized story using different Category Names.
+  Returns tokenized stories belonging to the specified category.
 
 parameters:
-  - name: 
-    in: category_name
-    type: string
+  - name: category_name
+    in: query
     required: true
-    description: Unique identifier of the story.
-    example: aesop,pancha,hito,jataka
+    type: string
+    description: Category name
+    example: aesop
 
 responses:
   200:
     description: Stories retrieved successfully
     schema:
-      type: Array of Objects
+      type: object
       properties:
         success:
           type: boolean
           example: true
+        count:
+          type: integer
+          example: 5
         data:
-          type: object
+          type: array
+          items:
+            type: object
+
+  400:
+    description: Category name is required
 
   404:
     description: No tokenized stories found for category
-
-  400:
-    description: Category Name is Required
 
   500:
     description: Internal server error
