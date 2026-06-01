@@ -11,4 +11,5 @@ pydantic
 spacy-wordnet
 gunicorn
 pymongo
+flasgger
 

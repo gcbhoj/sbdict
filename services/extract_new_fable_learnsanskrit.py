@@ -7,6 +7,7 @@ from services.fable_extraction_pipeline.tokenize_english_version_story import To
 from services.fable_extraction_pipeline.tokenize_sanskrit_version_story import TokenizeSanskritVersion
 from services.fable_extraction_pipeline.extract_english_synonym_antonym import ExtractEnglishSynonymAntonym
 from utils.file_system_writer import WriteToFileSystem
+from repository.write_tokenized_stories_to_mongodb import WriteTokenizedStoryToMongoDB
 
 class FetchNewFable:
     """Orchestrates the pipeline to fetch, clean, tokenize, and save a fable."""
@@ -36,19 +37,23 @@ class FetchNewFable:
         tokenized_english_with_grammer = self._add_synonym_antonym(tokenized_english)
         final_version = self._tokenize_sanskrit_version(tokenized_english_with_grammer)
         
+        
+        
+        result = self._write_to_mongoDB(final_version)
+        
 
         
-        # 4. Load / Persist
-        write_success = self._write_to_file_system(final_version)
-        if not write_success:
-            raise IOError("Failed writing tokenized story")
+        # # 4. Load / Persist
+        # write_success = self._write_to_file_system(final_version)
+        # if not write_success:
+        #     raise IOError("Failed writing tokenized story")
        
-        # 5. DB Updates
-        update_status = self._update_story_status(story_id)
-        if not update_status.get("success"):
-            raise ValueError(update_status.get("message"))
+        # # 5. DB Updates
+        # update_status = self._update_story_status(story_id)
+        # if not update_status.get("success"):
+        #     raise ValueError(update_status.get("message"))
             
-        return "FABLE DOWNLOADED SUCCESSFULLY"
+        return result
 
     # Helper methods 
     def _get_story_data(self, story_id):
@@ -82,3 +87,7 @@ class FetchNewFable:
     def _update_story_status(self, story_id):
         updater = UpdateStoryDataUsedStatus(story_id)
         return updater.execute()
+    
+    def _write_to_mongoDB(self, story):
+        writer = WriteTokenizedStoryToMongoDB(story)
+        return writer.save_story()

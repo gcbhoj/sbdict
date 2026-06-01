@@ -11,6 +11,7 @@ from config.swagger_config import SWAGGER_CONFIG,SWAGGER_TEMPLATE
 
 from routes.tokenized_data_routes import tokenize_data_bp
 from routes.story_data_routes import story_data_bp
+from routes.user_routes import user_bp
 
 
 app = Flask(__name__)
@@ -41,7 +42,7 @@ def debug_files():
             "data_files": os.listdir("/app/data") if os.path.exists("/app/data") else []
         }
 
-
+app.register_blueprint(user_bp,url_prefix = BASE_URL)
 app.register_blueprint(story_data_bp,url_prefix = BASE_URL)
 app.register_blueprint(tokenize_data_bp,url_prefix=BASE_URL)
 
