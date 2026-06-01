@@ -23,4 +23,6 @@ get_tokenized_by_id_controller = swag_from("../swaggerdocs/tokenized_data/get_to
 ## Get tokenized story by Id
 tokenize_data_bp.route("/getTokenizedById",methods=["GET"])(get_tokenized_by_id_controller)
 
-tokenize_data_bp.route("/getByCategory", methods=["GET"])(fetch_tokenized_stories_by_category)
+#Get Tokenized stories by category
+get_tokenized_stories_by_category_controller = swag_from("../swaggerdocs/tokenized_data/get_tokenized_stories_by_category.yml")(fetch_tokenized_stories_by_category)
+tokenize_data_bp.route("/getByCategory", methods=["GET"])(get_tokenized_stories_by_category_controller)
